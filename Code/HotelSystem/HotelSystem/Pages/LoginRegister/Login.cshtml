@@ -1,0 +1,17 @@
+﻿@page
+@model HotelSystem.Pages.LoginRegister.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post">
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" class="form-control" />
+    
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" class="form-control" />
+
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
