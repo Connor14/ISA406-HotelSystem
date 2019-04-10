@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
 using HotelSystem.Models;
+using HotelSystem.Application;
+using System.Diagnostics;
 
 namespace HotelSystem.Pages
 {
@@ -13,10 +15,7 @@ namespace HotelSystem.Pages
     {
         public void OnGet()
         {
-            if (HttpContext.Session.GetString(Constants.UserEmail) == null)
-            {
-                Response.Redirect("/LoginRegister/Login");
-            }
+
         }
     }
 }

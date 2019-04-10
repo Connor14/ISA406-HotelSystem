@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelSystem.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -57,6 +59,21 @@ namespace HotelSystem
             app.UseCookiePolicy();
 
             app.UseSession();
+
+            app.Use(async (context, next) =>
+            {
+                bool isLoginPage = context.Request.Path == "/LoginRegister/Login";
+                bool isRegisterPage = context.Request.Path == "/LoginRegister/Register";
+
+                if (!isLoginPage && !isRegisterPage && context.Session.GetString(Constants.UserEmail) == null)
+                {
+                    context.Response.Redirect("/LoginRegister/Login");
+                }
+                else
+                {
+                    await next.Invoke();
+                }
+            });
 
             app.UseMvc();
         }
