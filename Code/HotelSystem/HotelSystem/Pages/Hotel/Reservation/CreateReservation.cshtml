@@ -1,0 +1,55 @@
+﻿@page
+@model HotelSystem.Pages.Hotel.Reservation.CreateReservationModel
+@{
+    ViewData["Title"] = "CreateReservation";
+}
+
+<h2>Create a Reservation</h2>
+
+<div class="row">
+    <div class="col-md-2">
+        <h5>@Model.Hotel.Name</h5>
+        <p>@Model.Hotel.Street</p>
+        <p>@Model.Hotel.State, @Model.Hotel.ZipCode</p>
+        <input name="hotelId" value="@Model.Hotel.HotelID" hidden />
+    </div>
+    <div class="col-10">
+        
+    </div>
+</div>
+
+<form method="post">
+    <div class="row form-group">
+        <div class="col-md-6">
+            <label for="firstName">Start Date</label>
+            <input type="date" id="startDate" name="startDate" class="form-control" />
+        </div>
+
+        <div class="col-md-6">
+            <label for="lastName">End Date</label>
+            <input type="date" id="endDate" name="endDate" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-12 form-group">
+            <label for="email">Room Type</label>
+            <select name="roomType" class="form-control">
+                <option value="0">Single King</option>
+                <option value="1">Double Queen</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-10">
+
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary" style="width:100%">Reserve Now</button>
+        </div>
+    </div>
+</form>
+
+
+

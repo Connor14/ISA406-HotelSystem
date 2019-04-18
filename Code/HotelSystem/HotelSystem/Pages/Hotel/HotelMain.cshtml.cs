@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using HotelSystem.Application;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace HotelSystem.Pages.Hotel
+{
+    public class HotelMainModel : PageModel
+    {
+        public Models.Hotel Hotel;
+
+        public void OnGet()
+        {
+            int hotelId = HttpContext.Session.GetInt32(Constants.CurrentHotel).Value;
+            Hotel = new Models.Hotel() { HotelID = 1, Name = "Demo Name 1", State = "Ohio", City = "Oxford", Street = "5262 Brown Road", ZipCode = 45056 };
+        }
+    }
+}

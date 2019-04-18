@@ -4,8 +4,13 @@
     ViewData["Title"] = "Home page";
 }
 
-    <div>
-        <a class="btn btn-primary" asp-page="/Hotel/AllHotels" role="button">View Hotels</a>
-        <a class="btn btn-primary" asp-page="/Loyalty/Loyalty" role="button">View Loyalty</a>
-        <a class="btn btn-primary" asp-page="/CheckIn/CheckInMiddle" role="button">Check In</a>
-    </div>
+<h1>Welcome to the Oxford hotel chain!</h1>
+
+<p>More info about our chain here probably...</p>
+<a asp-page="/AllHotels">Please select a hotel to continue</a>
+
+@*<div>
+    <a class="btn btn-primary" asp-page="/AllHotels" role="button">View Hotels</a>
+    <a class="btn btn-primary" asp-page="/Loyalty/Loyalty" role="button">View Loyalty</a>
+    <a class="btn btn-primary" asp-page="/CheckIn/CheckInMiddle" role="button">Check In</a>
+</div>*@

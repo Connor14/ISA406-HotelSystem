@@ -1,0 +1,20 @@
+﻿@page
+@model HotelSystem.Pages.Hotel.HotelMainModel
+@{
+    ViewData["Title"] = "HotelMain";
+}
+
+<h2>HotelMain</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <h5>@Model.Hotel.Name</h5>
+        <p>@Model.Hotel.Street</p>
+        <p>@Model.Hotel.State, @Model.Hotel.ZipCode</p>
+    </div>
+    <div class="col">
+        <a class="btn btn-primary" asp-page="/Hotel/Reservation/CreateReservation" role="button">Create a Reservation</a>
+        <p>This will show pictures of the hotel and more detailed information</p>
+        <p>We will show your reservations here or something</p>
+    </div>
+</div>

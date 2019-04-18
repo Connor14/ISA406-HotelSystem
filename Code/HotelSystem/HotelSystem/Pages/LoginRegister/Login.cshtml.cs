@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
 using HotelSystem.Models;
+using HotelSystem.Application;
 
 namespace HotelSystem.Pages.LoginRegister
 {
@@ -17,16 +18,19 @@ namespace HotelSystem.Pages.LoginRegister
 
         }
 
-        public void OnPost()
+        // for some reason I needed IActionResult
+        public IActionResult OnPost()
         {
             string email = Request.Form["email"];
             string password = Request.Form["password"];
 
             if(email == "connor@connor.com" && password == "asdf")
             {
-                HttpContext.Session.SetString("User.Email", email);
-                Response.Redirect("/Index");
+                HttpContext.Session.SetString(Constants.UserEmail, email);
+                return Redirect("/Index");
             }
+
+            return null;
         }
     }
 }

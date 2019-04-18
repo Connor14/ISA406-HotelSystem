@@ -2,19 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
+using HotelSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace HotelSystem.Pages.LoginRegister
 {
     public class RegisterModel : PageModel
     {
+        private IConfiguration _configuration;
+
+        public RegisterModel(IConfiguration configuration)
+        {
+            this._configuration = configuration;
+        }
+
         public void OnGet()
         {
 
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             string firstName = Request.Form["firstName"];
             string lastName = Request.Form["lastName"];
@@ -34,18 +45,22 @@ namespace HotelSystem.Pages.LoginRegister
                 || string.IsNullOrWhiteSpace(passwordConfirm))
             {
                 //throw new Exception("Stuff is missing");
-                return;
+                return null;
             }
 
             if(password != passwordConfirm)
             {
                 //throw new Exception("Passwords don't match");
-                return;
+                return null;
             }
 
             // todo insert stuff into database.
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("Default")))
+            {
+                connection.Query<User>("SELECT * FROM User;");
+            }
 
-            Response.Redirect("/LoginRegister/Login");
+            return Redirect("/LoginRegister/Login");
         }
     }
 }

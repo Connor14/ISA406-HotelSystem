@@ -62,12 +62,26 @@ namespace HotelSystem
 
             app.Use(async (context, next) =>
             {
-                bool isLoginPage = context.Request.Path == "/LoginRegister/Login";
-                bool isRegisterPage = context.Request.Path == "/LoginRegister/Register";
+                bool isLoginRegister = context.Request.Path.Value.StartsWith("/LoginRegister/");
+                //bool isLoginPage = context.Request.Path == "/LoginRegister/Login";
+                //bool isRegisterPage = context.Request.Path == "/LoginRegister/Register";
 
-                if (!isLoginPage && !isRegisterPage && context.Session.GetString(Constants.UserEmail) == null)
+                // don't allow access to these unless current hotelId is set
+                bool isHotelSpecific = context.Request.Path.Value.StartsWith("/Hotel/");
+                //bool isAllHotelsPage = context.Request.Path == "/AllHotels";
+
+                string email = context.Session.GetString(Constants.UserEmail);
+                int? hotelId = context.Session.GetInt32(Constants.CurrentHotel);
+
+                //Debug.WriteLine(context.Request.Path + " " + emailSet + " " + email);
+
+                if (!isLoginRegister && email == null) // not logged in
                 {
                     context.Response.Redirect("/LoginRegister/Login");
+                }
+                else if (isHotelSpecific && hotelId == null) // is hotel specific, no hotel selected
+                {
+                    context.Response.Redirect("/AllHotels");
                 }
                 else
                 {
