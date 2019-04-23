@@ -24,7 +24,7 @@ namespace HotelSystem.Pages.Hotel.Reservation
         {
             return Redirect("/Hotel/Reservation/ReservationConfirmation");
 
-            return null;
+            //return null;
         }
     }
 }

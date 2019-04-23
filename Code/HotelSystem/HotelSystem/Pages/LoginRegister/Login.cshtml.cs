@@ -8,11 +8,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
 using HotelSystem.Models;
 using HotelSystem.Application;
+using MySql.Data.MySqlClient;
+using Microsoft.Extensions.Configuration;
+using Dapper;
 
 namespace HotelSystem.Pages.LoginRegister
 {
     public class LoginModel : PageModel
     {
+        private IConfiguration _configuration;
+
+        public LoginModel(IConfiguration configuration)
+        {
+            this._configuration = configuration;
+        }
+
         public void OnGet()
         {
 
@@ -24,9 +34,19 @@ namespace HotelSystem.Pages.LoginRegister
             string email = Request.Form["email"];
             string password = Request.Form["password"];
 
-            if(email == "connor@connor.com" && password == "asdf")
+            if(string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password)){
+                return null;
+            }
+
+            User foundUser = null;
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("Default")))
             {
-                HttpContext.Session.SetString(Constants.UserEmail, email);
+                foundUser = connection.QuerySingleOrDefault<User>("SELECT * FROM User WHERE EmailAddress = @EmailAddress AND Password = @Password;", new { EmailAddress = email, Password = password });
+            }
+
+            if(foundUser != null)
+            {
+                HttpContext.Session.SetString(Constants.UserEmail, foundUser.EmailAddress);
                 return Redirect("/Index");
             }
 

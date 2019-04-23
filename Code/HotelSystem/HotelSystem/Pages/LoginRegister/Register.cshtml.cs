@@ -54,13 +54,28 @@ namespace HotelSystem.Pages.LoginRegister
                 return null;
             }
 
+            User newUser = new User(){
+                FirstName = firstName,
+                LastName = lastName,
+                EmailAddress = email,
+                PhoneNumber = phone,
+                DOB = DateTime.Parse(birthday),
+                Password = password,
+                RoleID_RoleID = 1
+            };
+
+            int registerResult = -1;
             // todo insert stuff into database.
             using (var connection = new MySqlConnection(_configuration.GetConnectionString("Default")))
             {
-                connection.Query<User>("SELECT * FROM User;");
+                registerResult = connection.Execute("INSERT INTO User (FirstName, LastName, EmailAddress, DOB, Password, RoleID_RoleID) VALUES (@FirstName, @LastName, @EmailAddress, @DOB, @Password, @RoleID_RoleID)", newUser);
             }
 
-            return Redirect("/LoginRegister/Login");
+            if(registerResult > 0){
+                return Redirect("/LoginRegister/Login");
+            }
+
+            return null;
         }
     }
 }

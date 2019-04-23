@@ -13,5 +13,7 @@ namespace HotelSystem.Models
         public string PhoneNumber { get; set; }
         public DateTime DOB { get; set; }
         public string Password { get; set; }
+        public string EmailAddress { get; set; }
+        public int RoleID_RoleID { get; set; }
     }
 }
