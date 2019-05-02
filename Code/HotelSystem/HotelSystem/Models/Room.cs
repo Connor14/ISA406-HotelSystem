@@ -19,7 +19,7 @@ namespace HotelSystem.Models
 		public int BedCount { get; set; }
 		public int BathroomCount { get; set; }
 		public string Description { get; set; }
-		public string Price { get; set; }
+		public double Price { get; set; }
 
         public RoomType RoomType { get; set; }
     }

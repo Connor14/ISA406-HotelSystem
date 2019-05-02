@@ -21,12 +21,12 @@
 <form method="post">
     <div class="row form-group">
         <div class="col-md-6">
-            <label for="firstName">Start Date</label>
+            <label for="startDate">Start Date</label>
             <input type="date" id="startDate" name="startDate" class="form-control" />
         </div>
 
         <div class="col-md-6">
-            <label for="lastName">End Date</label>
+            <label for="endDate">End Date</label>
             <input type="date" id="endDate" name="endDate" class="form-control" />
         </div>
     </div>
@@ -35,8 +35,10 @@
         <div class="col-md-12 form-group">
             <label for="email">Room Type</label>
             <select name="roomType" class="form-control">
-                <option value="0">Single King</option>
-                <option value="1">Double Queen</option>
+                @foreach (var item in Model.Rooms)
+                {
+                    <option value="@item.Description">@item.Description</option>
+                }
             </select>
         </div>
     </div>

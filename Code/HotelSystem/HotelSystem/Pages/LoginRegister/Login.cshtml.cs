@@ -47,6 +47,8 @@ namespace HotelSystem.Pages.LoginRegister
             if(foundUser != null)
             {
                 HttpContext.Session.SetString(Constants.UserEmail, foundUser.EmailAddress);
+                HttpContext.Session.SetInt32(Constants.UserId, foundUser.UserID);
+
                 return Redirect("/Index");
             }
 

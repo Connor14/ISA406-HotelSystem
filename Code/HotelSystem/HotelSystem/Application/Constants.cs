@@ -9,6 +9,7 @@ namespace HotelSystem.Application
     {
 
         public static string UserEmail = "User.Email";
+        public static string UserId = "User.Id";
 
         public static string CurrentHotel = "Hotel.Current";
 
