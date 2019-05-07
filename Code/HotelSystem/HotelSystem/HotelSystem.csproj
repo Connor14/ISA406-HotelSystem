@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Include="Models\Room.cs" />
+    <None Include="wwwroot\images\Marcum_Hotel.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +19,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
     <PackageReference Include="MySql.Data" Version="8.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\NewFolder\" />
   </ItemGroup>
 
 </Project>

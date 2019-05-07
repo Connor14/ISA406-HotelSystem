@@ -62,6 +62,7 @@ namespace HotelSystem
 
             app.Use(async (context, next) =>
             {
+                bool isIndex = context.Request.Path.Value.StartsWith("/") || context.Request.Path.Value.StartsWith("/Index");
                 bool isLoginRegister = context.Request.Path.Value.StartsWith("/LoginRegister/");
                 //bool isLoginPage = context.Request.Path == "/LoginRegister/Login";
                 //bool isRegisterPage = context.Request.Path == "/LoginRegister/Register";
@@ -74,14 +75,17 @@ namespace HotelSystem
                 int? hotelId = context.Session.GetInt32(Constants.CurrentHotel);
 
                 //Debug.WriteLine(context.Request.Path + " " + emailSet + " " + email);
-
-                if (!isLoginRegister && email == null) // not logged in
+                if (!isLoginRegister && !isIndex && email == null) // not logged in
+                {
+                    context.Response.Redirect("/LoginRegister/Login");
+                }
+                else if (isHotelSpecific && email == null) // is hotel specific, no hotel selected
                 {
                     context.Response.Redirect("/LoginRegister/Login");
                 }
                 else if (isHotelSpecific && hotelId == null) // is hotel specific, no hotel selected
                 {
-                    context.Response.Redirect("/AllHotels");
+                    context.Response.Redirect("/Index");
                 }
                 else
                 {

@@ -4,13 +4,28 @@
     ViewData["Title"] = "Home page";
 }
 
-<h1>Welcome to the Oxford hotel chain!</h1>
-
-<p>More info about our chain here probably...</p>
-<a asp-page="/AllHotels">Please select a hotel to continue</a>
+<h1 class="text-center">Welcome to the Oxford Hotel Chain!</h1>
+<p class="text-center">We offer luxury hotels at affordable prices!</p>
+<img src="~/images/bell.jpg" class="img-responsive" alt="Bell">
+<h2 class="text-center">Please select one of our luxury hotels!</h2>
 
 @*<div>
-    <a class="btn btn-primary" asp-page="/AllHotels" role="button">View Hotels</a>
-    <a class="btn btn-primary" asp-page="/Loyalty/Loyalty" role="button">View Loyalty</a>
-    <a class="btn btn-primary" asp-page="/CheckIn/CheckInMiddle" role="button">Check In</a>
-</div>*@
+        <a class="btn btn-primary" asp-page="/AllHotels" role="button">View Hotels</a>
+        <a class="btn btn-primary" asp-page="/Loyalty/Loyalty" role="button">View Loyalty</a>
+        <a class="btn btn-primary" asp-page="/CheckIn/CheckInMiddle" role="button">Check In</a>
+    </div>*@
+
+<div class="row">
+    @foreach (var item in Model.Hotels)
+    {
+        <div class="col-md-3">
+            <form method="post" asp-page-handler="SelectHotel">
+                <h3>@item.Name</h3>
+                <p>@item.Street</p>
+                <p>@item.State, @item.ZipCode</p>
+                <input name="hotelId" value="@item.HotelID" hidden />
+                <button class="btn btn-primary" type="submit">Select</button>
+            </form>
+        </div>
+    }
+</div>
