@@ -64,8 +64,6 @@ namespace HotelSystem.Pages.Hotel.Reservation
                     new { HotelID = hotelId, Description = desc, StartDate = startDate, EndDate = endDate },
                     splitOn: "*");
 
-                Debug.WriteLine(Rooms.First());
-
                 if(Rooms.Count() <= roomsOfType.Count())
                 {
                     // the number of reservations for this room is less than the number of roooms available
@@ -100,10 +98,16 @@ namespace HotelSystem.Pages.Hotel.Reservation
 
                         connection.Execute("INSERT INTO Reservation (StartDate, EndDate, Cost, User_UserID, Room_RoomID) VALUES (@StartDate, @EndDate, @Cost, @UserID, @RoomID);",
                         new { StartDate = startDate, EndDate = endDate, Cost = assignedRoom.Price * Math.Ceiling(duration.TotalDays), UserID = userId , RoomID = assignedRoom.RoomID });
-                        Debug.WriteLine(assignedRoom.Price * Math.Ceiling(duration.TotalDays));
+                        double cost = assignedRoom.Price * Math.Ceiling(duration.TotalDays);
+
+                        HttpContext.Session.SetInt32("reservationCost", (int) cost);
+                        HttpContext.Session.SetString("reservationStart", startDate);
+                        HttpContext.Session.SetString("reservationEnd", endDate);
+                        return Redirect("/Hotel/Reservation/ReservationConfirmation");
                     }
                     else
                     {
+                    return Redirect("/Hotel/Reservation/NoneAvailable");
                         return null;
                     }
                 }
@@ -113,7 +117,6 @@ namespace HotelSystem.Pages.Hotel.Reservation
                     return null;
                 }
             }
-            return Redirect("/Hotel/Reservation/ReservationConfirmation");
 
             //return null;
         }
