@@ -4,6 +4,32 @@
 }
     <div>
         <h1>Loyalty Viewer</h1>
-        <h2>@Model.points</h2>
+        <h2>You have: @Model.points loyalty points.</h2>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Points</th>
+                    <th scope="col">Reward</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">500</th>
+                    <td>A free stay</td>
+                    <td><img src="~/images/room.jpg" height="300" width="400"/></td>
+                </tr>
+                <tr>
+                    <th scope="row">2000</th>
+                    <td>A spa trip</td>
+                    <td><img src="~/images/spa.jpg" height="300" width="400"/></td>
+                </tr>
+                <tr>
+                    <th scope="row">5000</th>
+                    <td>A cruise</td>
+                    <td><img src="~/images/cruise.jpg" height="300" width="400"/></td>
+                </tr>
+            </tbody>
+        </table>
         <!--This is where we put all the stuff for the loyalty rewards program.-->
     </div>
