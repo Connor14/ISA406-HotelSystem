@@ -68,7 +68,7 @@ namespace HotelSystem
                 //bool isRegisterPage = context.Request.Path == "/LoginRegister/Register";
 
                 // don't allow access to these unless current hotelId is set
-                bool isHotelSpecific = context.Request.Path.Value.StartsWith("/Hotel/");
+                bool isHotelSpecific = context.Request.Path.Value.StartsWith("/Hotel/") || context.Request.Path.Value.StartsWith("/Loyalty/");
                 //bool isAllHotelsPage = context.Request.Path == "/AllHotels";
 
                 string email = context.Session.GetString(Constants.UserEmail);
