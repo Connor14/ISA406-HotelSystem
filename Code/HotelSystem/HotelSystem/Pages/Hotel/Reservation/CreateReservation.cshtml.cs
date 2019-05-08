@@ -79,6 +79,8 @@ namespace HotelSystem.Pages.Hotel.Reservation
                             Reservation.StartDate < @StartDate AND @StartDate < Reservation.EndDate
                             OR
                             Reservation.StartDate < @EndDate AND @EndDate < Reservation.EndDate
+                            OR 
+                            Reservation.StartDate = @StartDate AND Reservation.EndDate = @EndDate
                         )",
                     Tuple.Create,
                     new { HotelID = hotelId, Description = desc, StartDate = startDate, EndDate = endDate },
