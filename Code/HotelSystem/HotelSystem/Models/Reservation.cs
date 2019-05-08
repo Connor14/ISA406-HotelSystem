@@ -12,5 +12,7 @@ namespace HotelSystem.Models
         public double Cost { get; set; }
         public int User_UserID{get;set;}
         public int Room_RoomID { get; set; }
+        public bool CheckedIn { get; set; }
+        public bool CheckedOut { get; set; }
     }
 }

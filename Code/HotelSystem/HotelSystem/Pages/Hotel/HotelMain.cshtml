@@ -3,18 +3,66 @@
 @{
     ViewData["Title"] = "HotelMain";
 }
-
-<h2>HotelMain</h2>
+<!-- begin header -->
+<h1>@Model.Hotel.Name</h1>
 
 <div class="row">
     <div class="col-md-3">
-        <h5>@Model.Hotel.Name</h5>
         <p>@Model.Hotel.Street</p>
         <p>@Model.Hotel.State, @Model.Hotel.ZipCode</p>
     </div>
     <div class="col">
-        <a class="btn btn-primary" asp-page="/Hotel/Reservation/CreateReservation" role="button">Create a Reservation</a>
-        <p>This will show pictures of the hotel and more detailed information</p>
-        <p>We will show your reservations here or something</p>
+        <p>This could show pictures of the hotel and more detailed information</p>
     </div>
 </div>
+
+<ul class="list-inline">
+    <li>
+        <a class="btn btn-primary" asp-page="/Hotel/HotelMain" role="button">Hotel Home</a>
+    </li>
+    <li>
+        <a class="btn btn-success" asp-page="/Hotel/Reservation/CreateReservation" role="button">Create a Reservation</a>
+    </li>
+    @{
+        if (Model.RoleId == 2)
+        {
+            <li>
+                <a class="btn btn-warning" asp-page="/Hotel/Staff/FrontDesk" role="button">Front Desk</a>
+            </li>
+        }
+    }
+</ul>
+<!-- end header -->
+
+<h3>My Reservations</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Cost</th>
+            <th>Room Number</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (dynamic res in Model.MyReservations)
+            {
+                <tr>
+                    <td>@res.StartDate.ToString("D")</td>
+                    <td>@res.EndDate.ToString("D")</td>
+                    <td>@res.Cost</td>
+                    <td>@res.RoomNo</td>
+                    <td>@res.Description</td>
+                    <td>
+                        <form method="post">
+                            <input name="reservationId" value=@res.ReservationID hidden />
+                            <button class="btn btn-danger" name="actionButton" value="cancel">Cancel</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

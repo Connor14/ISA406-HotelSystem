@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
@@ -36,6 +37,10 @@ namespace HotelSystem.Pages.LoginRegister
             string password = Request.Form["password"];
             string passwordConfirm = Request.Form["passwordConfirm"];
 
+            string accountType = Request.Form["accountType"];
+
+            Debug.WriteLine(accountType);
+
             if (string.IsNullOrWhiteSpace(firstName)
                 || string.IsNullOrWhiteSpace(lastName)
                 || string.IsNullOrWhiteSpace(email) 
@@ -61,7 +66,7 @@ namespace HotelSystem.Pages.LoginRegister
                 PhoneNumber = phone,
                 DOB = DateTime.Parse(birthday),
                 Password = password,
-                RoleID_RoleID = 1
+                RoleID_RoleID = int.Parse(accountType)
             };
 
             int registerResult = -1;
