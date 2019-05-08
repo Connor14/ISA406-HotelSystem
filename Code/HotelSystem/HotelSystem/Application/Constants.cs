@@ -11,6 +11,9 @@ namespace HotelSystem.Application
         public static string UserEmail = "User.Email";
         public static string UserId = "User.Id";
 
+        public static string UserRoleId = "User.RoleId";
+        public static string UserRole = "User.Role";
+
         public static string CurrentHotel = "Hotel.Current";
 
     }
