@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\Room.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Models\Room.cs" />
     <None Include="wwwroot\images\Marcum_Hotel.jpg" />
   </ItemGroup>
 

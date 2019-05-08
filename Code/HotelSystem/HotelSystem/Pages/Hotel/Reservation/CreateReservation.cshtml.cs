@@ -10,13 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using HotelSystem.Models;
 
 namespace HotelSystem.Pages.Hotel.Reservation
 {
     public class CreateReservationModel : PageModel
     {
         public Models.Hotel Hotel;
-        public IEnumerable<Models.Room> Rooms;
+        public IEnumerable<Room> Rooms;
         private IConfiguration _configuration;
 
         public CreateReservationModel(IConfiguration configuration)
